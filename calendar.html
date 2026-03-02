@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Journal - Calendar</title>
+    <link rel="stylesheet" href="calendar.css">
+</head>
+<body>
+    <header class="calendar-header">
+        <div class="calendar-header-inner">
+            <a class="brand" href="/dashboard">Trade Journal</a>
+            <nav class="top-nav">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/journal">Journal</a>
+                <a class="active" href="/calendar">Calendar</a>
+            </nav>
+            <button id="logout-button" class="btn-ghost" type="button">Log Out</button>
+        </div>
+    </header>
+
+    <main class="calendar-main">
+        <section class="calendar-top-card">
+            <p class="eyebrow">Calendar View</p>
+            <h1>Review Trades by Day</h1>
+            <p>Signed in as <strong id="user-email">Loading...</strong></p>
+        </section>
+
+        <section class="calendar-layout">
+            <article class="calendar-card">
+                <div class="calendar-controls">
+                    <div class="month-nav">
+                        <button id="prev-month" type="button" class="control-btn">Prev</button>
+                        <h2 id="month-label">Month YYYY</h2>
+                        <button id="next-month" type="button" class="control-btn">Next</button>
+                    </div>
+                    <div class="controls-right">
+                        <div class="heatmap-toggle" role="group" aria-label="Heatmap mode">
+                            <button id="toggle-pnl" type="button" class="toggle-btn is-active">P&amp;L Heatmap</button>
+                            <button id="toggle-winrate" type="button" class="toggle-btn">Win Rate Heatmap</button>
+                        </div>
+                        <button id="today-btn" type="button" class="control-btn today-btn">Today</button>
+                    </div>
+                </div>
+
+                <div class="month-summary">
+                    <span>Month P&amp;L</span>
+                    <strong id="month-total-pnl">$0.00</strong>
+                </div>
+
+                <div class="calendar-weekdays" aria-hidden="true">
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                </div>
+
+                <div class="calendar-legend" aria-label="Heatmap legend">
+                    <span><i class="legend-dot legend-profit"></i> <b id="legend-positive-text">Profit day</b></span>
+                    <span><i class="legend-dot legend-loss"></i> <b id="legend-negative-text">Loss day</b></span>
+                    <span><i class="legend-dot legend-flat"></i> <b id="legend-neutral-text">Flat / no trades</b></span>
+                </div>
+
+                <div id="calendar-grid" class="calendar-grid" aria-label="Month calendar"></div>
+            </article>
+
+            <article class="detail-card">
+                <h2 id="selected-date-label">Select a day</h2>
+                <p id="selected-date-summary">Click a day to view journal entries.</p>
+
+                <div id="day-entries" class="day-entries">
+                    <p class="empty-message">No date selected.</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="calendar.js"></script>
+</body>
+</html>

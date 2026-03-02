@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Journal Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="side-panel" aria-label="Dashboard navigation">
+            <a class="brand" href="/">Trade Journal</a>
+
+            <nav class="side-nav">
+                <a class="nav-link is-active" href="#overview" data-nav-link>Overview</a>
+                <a class="nav-link" href="#journal" data-nav-link>Journal</a>
+                <a class="nav-link" href="#analytics" data-nav-link>Analytics</a>
+                <a class="nav-link" href="#account" data-nav-link>Account</a>
+            </nav>
+
+            <section class="user-chip">
+                <p>Signed in as</p>
+                <strong id="nav-user-email">Loading...</strong>
+            </section>
+        </aside>
+
+        <main class="content-area">
+            <header class="content-header">
+                <div>
+                    <p class="eyebrow">Trading Workspace</p>
+                    <h1>Welcome back, <span id="user-name">Trader</span>.</h1>
+                    <p id="user-email">Loading account...</p>
+                </div>
+
+                <div class="header-actions">
+                    <a href="/" class="btn-secondary">Landing Page</a>
+                    <button id="logout-button" class="btn-primary" type="button">Log Out</button>
+                </div>
+            </header>
+
+            <section id="overview" class="panel">
+                <div class="panel-header">
+                    <h2>Overview</h2>
+                    <p>Your high-level performance snapshot.</p>
+                </div>
+
+                <div class="stats-grid" aria-label="Performance stats">
+                    <article class="stat-card">
+                        <h3>Total Trades</h3>
+                        <p id="stat-total-trades">0</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <h3>Win Rate</h3>
+                        <p id="stat-win-rate">0%</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <h3>Total P&amp;L</h3>
+                        <p id="stat-total-pnl">$0.00</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <h3>Account Created</h3>
+                        <p id="account-created">-</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="journal" class="panel">
+                <div class="panel-header">
+                    <h2>Journal</h2>
+                    <p>Quick actions to keep your process consistent.</p>
+                </div>
+
+                <div class="actions-grid">
+                    <a class="action-card" href="/journal">
+                        <strong>New Trade Entry</strong>
+                        <span>Capture setup, entry, stop, target, and notes.</span>
+                    </a>
+
+                    <a class="action-card" href="/journal">
+                        <strong>Weekly Review</strong>
+                        <span>Review your trades and mark execution quality.</span>
+                    </a>
+
+                    <a class="action-card" href="/journal">
+                        <strong>Upload Screenshots</strong>
+                        <span>Attach chart evidence to each decision.</span>
+                    </a>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-head">
+                        <h3>Recent Trades</h3>
+                        <small>Connected to your account data</small>
+                    </div>
+
+                    <div class="table-row table-row-head">
+                        <span>Date</span>
+                        <span>Setup</span>
+                        <span>Result</span>
+                        <span>P&amp;L</span>
+                    </div>
+                    <div class="table-row">
+                        <span>Waiting for entries</span>
+                        <span>--</span>
+                        <span>--</span>
+                        <span>--</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="analytics" class="panel">
+                <div class="panel-header">
+                    <h2>Analytics</h2>
+                    <p>Visual checkpoints to guide your next improvements.</p>
+                </div>
+
+                <div class="analytics-grid">
+                    <article class="insight-card">
+                        <h3>Win Rate Gauge</h3>
+                        <div class="meter-track" aria-hidden="true">
+                            <div id="win-rate-meter" class="meter-fill"></div>
+                        </div>
+                        <p><span id="win-rate-text">0%</span> of all closed trades are wins.</p>
+                    </article>
+
+                    <article class="insight-card">
+                        <h3>P&amp;L Health</h3>
+                        <p id="pnl-health">No P&amp;L history yet. Start logging trades.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="account" class="panel">
+                <div class="panel-header">
+                    <h2>Account</h2>
+                    <p>Identity and session details for this workspace.</p>
+                </div>
+
+                <div class="account-grid">
+                    <article class="account-item">
+                        <h3>Full Name</h3>
+                        <p id="account-name">-</p>
+                    </article>
+
+                    <article class="account-item">
+                        <h3>Email</h3>
+                        <p id="account-email">-</p>
+                    </article>
+
+                    <article class="account-item">
+                        <h3>Status</h3>
+                        <p class="status-pill">Authenticated</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

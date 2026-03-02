@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Journal - New Entry</title>
+    <link rel="stylesheet" href="journal.css">
+</head>
+<body>
+    <header class="journal-header">
+        <div class="journal-header-inner">
+            <a class="brand" href="/dashboard">Trade Journal</a>
+            <nav class="top-nav">
+                <a href="/dashboard">Dashboard</a>
+                <a class="active" href="/journal">Journal</a>
+            </nav>
+            <button id="logout-button" class="btn-ghost" type="button">Log Out</button>
+        </div>
+    </header>
+
+    <main class="journal-main">
+        <section class="hero-card">
+            <p class="eyebrow">Journal Workspace</p>
+            <h1>Add a New Trade Entry</h1>
+            <p>Signed in as <strong id="user-email">Loading...</strong></p>
+        </section>
+
+        <section class="summary-grid" aria-label="Journal summary">
+            <article class="summary-card">
+                <h2>Total Entries</h2>
+                <p id="summary-total">0</p>
+            </article>
+            <article class="summary-card">
+                <h2>Win Rate</h2>
+                <p id="summary-win-rate">0%</p>
+            </article>
+            <article class="summary-card">
+                <h2>Total P&amp;L</h2>
+                <p id="summary-pnl">$0.00</p>
+            </article>
+        </section>
+
+        <section class="workspace-grid">
+            <article class="form-panel">
+                <h2>Trade Details</h2>
+                <form id="journal-entry-form" class="entry-form" novalidate>
+                    <label for="trade-date">Trade Date</label>
+                    <input id="trade-date" name="tradeDate" type="date" required>
+
+                    <label for="symbol">Symbol</label>
+                    <input id="symbol" name="symbol" type="text" placeholder="AAPL" maxlength="12">
+
+                    <label for="setup">Setup</label>
+                    <select id="setup" name="setup" required>
+                        <option value="">Select setup</option>
+                        <option value="Breakout">Breakout</option>
+                        <option value="Pullback">Pullback</option>
+                        <option value="Reversal">Reversal</option>
+                        <option value="Trend Continuation">Trend Continuation</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <label for="result">Result</label>
+                    <select id="result" name="result" required>
+                        <option value="win">Win</option>
+                        <option value="loss">Loss</option>
+                    </select>
+
+                    <label for="pnl">P&amp;L ($)</label>
+                    <input id="pnl" name="pnl" type="number" step="0.01" placeholder="0.00" required>
+
+                    <label for="confidence">Confidence: <span id="confidence-value">5</span>/10</label>
+                    <input id="confidence" name="confidence" type="range" min="1" max="10" value="5">
+
+                    <label for="trade-image">Trade Screenshot (optional)</label>
+                    <input id="trade-image" name="tradeImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+                    <p class="field-note">PNG, JPG, WEBP, or GIF up to 5MB.</p>
+                    <div id="trade-image-preview-wrap" class="image-preview-wrap hidden">
+                        <img id="trade-image-preview" class="image-preview" alt="Trade screenshot preview">
+                    </div>
+
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" name="notes" rows="5" maxlength="1000" placeholder="Why did you take this trade? What did you do well or poorly?"></textarea>
+
+                    <button type="submit" class="btn-primary">Save Trade Entry</button>
+                    <p id="journal-message" class="form-message" aria-live="polite"></p>
+                </form>
+            </article>
+
+            <article class="entries-panel">
+                <div class="entries-header">
+                    <h2>Recent Entries</h2>
+                    <small>Most recent 100 trades</small>
+                </div>
+
+                <div class="entries-table-wrap">
+                    <table class="entries-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Symbol</th>
+                                <th>Setup</th>
+                                <th>Result</th>
+                                <th>P&amp;L</th>
+                                <th>Conf.</th>
+                                <th>Image</th>
+                            </tr>
+                        </thead>
+                        <tbody id="entries-body">
+                            <tr>
+                                <td colspan="7" class="empty-row">No entries yet. Add your first trade.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="journal.js"></script>
+</body>
+</html>

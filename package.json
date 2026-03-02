@@ -1,0 +1,10 @@
+{
+  "name": "trade-journal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Trade Journal landing page with SQLite auth and protected dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
