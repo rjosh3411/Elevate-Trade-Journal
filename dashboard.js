@@ -1,6 +1,5 @@
 (function () {
     var logoutButton = document.getElementById('logout-button');
-    var navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
 
     function setText(id, value) {
         var node = document.getElementById(id);
@@ -63,50 +62,6 @@
         }
 
         return data;
-    }
-
-    function updateNavState(sectionId) {
-        navLinks.forEach(function (link) {
-            var target = link.getAttribute('href');
-            var isActive = target === '#' + sectionId;
-            link.classList.toggle('is-active', isActive);
-        });
-    }
-
-    function initNav() {
-        navLinks.forEach(function (link) {
-            link.addEventListener('click', function () {
-                var targetId = (link.getAttribute('href') || '').replace('#', '');
-
-                if (targetId) {
-                    updateNavState(targetId);
-                }
-            });
-        });
-
-        var sections = Array.from(document.querySelectorAll('section[id]'));
-
-        if (!sections.length || typeof IntersectionObserver === 'undefined') {
-            return;
-        }
-
-        var observer = new IntersectionObserver(
-            function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        updateNavState(entry.target.id);
-                    }
-                });
-            },
-            {
-                root: null,
-                threshold: 0.35
-            }
-        );
-
-        sections.forEach(function (section) {
-            observer.observe(section);
-        });
     }
 
     async function loadSession() {
@@ -182,8 +137,6 @@
     if (logoutButton) {
         logoutButton.addEventListener('click', logout);
     }
-
-    initNav();
 
     Promise.all([loadSession(), loadStats()]).catch(function (error) {
         console.error(error);

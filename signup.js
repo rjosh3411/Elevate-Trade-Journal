@@ -54,21 +54,49 @@
     }
 
     async function postJson(url, payload) {
-        var response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
+        var response;
 
-        var data = await response.json().catch(function () {
-            return null;
-        });
-
-        if (!response.ok) {
-            throw new Error(data && data.error ? data.error : 'Request failed.');
+        try {
+            response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        } catch {
+            throw new Error('Cannot connect to the server. Start the app with "npm start" and open http://localhost:3000');
         }
 
-        return data;
+        var contentType = String(response.headers.get('content-type') || '').toLowerCase();
+        var data = null;
+        var text = '';
+
+        if (contentType.indexOf('application/json') !== -1) {
+            data = await response.json().catch(function () {
+                return null;
+            });
+        } else {
+            text = await response.text().catch(function () {
+                return '';
+            });
+        }
+
+        if (!response.ok) {
+            if (data && data.error) {
+                throw new Error(data.error);
+            }
+
+            if (response.status === 404) {
+                throw new Error('Auth API not found. Open the app at http://localhost:3000 (not a file preview server).');
+            }
+
+            if (response.status >= 500) {
+                throw new Error('Server error while creating account. Please try again.');
+            }
+
+            throw new Error(text || 'Request failed.');
+        }
+
+        return data || {};
     }
 
     async function checkExistingSession() {
@@ -89,6 +117,7 @@
             }
         } catch (error) {
             console.error(error);
+            setMessage(signupMessage, 'Server connection check failed. Make sure the app is running at http://localhost:3000', 'error');
         }
     }
 
